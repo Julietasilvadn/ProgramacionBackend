@@ -27,7 +27,7 @@ class ProductManager {
       if (product) {
         return product;
       } else {
-        console.error("Not found");
+        console.error("Product not found");
       }
     }
   }
