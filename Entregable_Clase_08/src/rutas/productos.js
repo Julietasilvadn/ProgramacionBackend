@@ -39,27 +39,34 @@ rutaProducto.get('/:pid', async (req,res)=>{
     
 })
 
-//Funciona masomenos, no le agrega bien el code y no se guarda
+//Funciona 
 rutaProducto.post('/', async (req,res)=>{
     const producto = req.body;
     await productos.addProduct(producto.title, producto.description, producto.price, producto.thumbnail, producto.stock);
+    await productos.saveProduct();
     res.send(producto)
 })
 
-//No funciona
+//Funciona
 rutaProducto.put('/:pid',async (req,res)=>{
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.params.pid);
     const producto = req.body;
     await productos.updateProduct(id,producto)
     res.json(producto);
 })
 
 
-//Funciona pero borra otro id(el ultimo que se agrega)
+//Funciona
 rutaProducto.delete('/:pid',async(req,res)=>{
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.params.pid);
+    const deletedProduct = await productos.getProductById(id);
     await productos.deleteProduct(id);
-    res.json({ status : 'producto borrado' });
+    if (deletedProduct) {
+        res.json({ status: 'Producto borrado', producto: deletedProduct });
+    } else {
+        res.json({ error: 'ID de producto no encontrado' });
+    }
+    
 })
 
 export { rutaProducto }

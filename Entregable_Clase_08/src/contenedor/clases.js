@@ -14,7 +14,7 @@ export class ProductManager {
         try {
           const data = await fs.readFileSync(this.path);
           this.products = JSON.parse(data);
-          this.lastProductId = this.products.reduce((maxId, product) => Math.max(maxId, product.id), 0);
+          this.lastProductId = this.products.reduce((maxId, product) => Math.max(maxId, product.code), 0);
         } catch (error) {
           this.products = [];
           this.lastProductId = 0;
@@ -23,7 +23,7 @@ export class ProductManager {
 
     generateCode() {
         this.lastProductId++;
-        return this.lastProductId;
+        return this.lastProductId.toString();
     }
 
     async saveProduct(){
@@ -44,10 +44,10 @@ export class ProductManager {
   
     async addProduct(title, description, price, thumbnail, stock) {
         try {
-            const code = this.generateCode();
+            const code = parseInt(this.generateCode());
             const product = { code, title, description, price, thumbnail, stock };
             await this.products.push(product);
-            await this.saveProduct;
+            await this.saveProduct();
             return product;
         } catch (err) {
             console.log('Error al agregar producto', err)
@@ -70,10 +70,13 @@ export class ProductManager {
     async deleteProduct(id){
         try {
             const product = await this.products.findIndex(p => p.code === id);
-            this.products.splice(product,1);
-            await this.saveProduct();
-            console.log(`El producto con el id ${id} fue borrado`)
-            
+            if (product !== -1) {
+                this.products.splice(product,1);
+                await this.saveProduct();
+                console.log(`El producto con el id ${id} fue borrado`)
+            } else {
+                console.log(`No se encontró ningún producto con el ID ${id}`)
+            }
         } catch (err) {
             console.log('Error al borrar producto', err)
         }

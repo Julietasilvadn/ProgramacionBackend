@@ -1,6 +1,6 @@
 import express from 'express';
 import { rutaProducto } from './rutas/productos.js';
-//import { rutaCarrito } from './rutas/carrito.js';
+import { rutaCarrito } from './rutas/carrito.js';
 const aplicacion = express();
 const port = process.env.PORT || 8080;
 
@@ -10,7 +10,7 @@ aplicacion.use(express.urlencoded({ extended: true }));
 
 //RUTAS
 aplicacion.use('/api/products', rutaProducto);
-//aplicacion.use('/api/carts', rutaCarrito);
+aplicacion.use('/api/carts', rutaCarrito);
 
 //MIDLEWARE
 aplicacion.use((peticion, respuesta, next) => {
