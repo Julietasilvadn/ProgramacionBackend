@@ -24,8 +24,7 @@ rutaCarrito.post('/', async(req,res)=>{
         date: Date.now(),
         productos: []
       };
-      await carritos.saveProduct();
-      res.json(carrito);
+    res.json(carrito);
 })
 
 //rutaCarrito.post('/:cid/product/:pid', async(req,res)=>{
