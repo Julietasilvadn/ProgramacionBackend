@@ -1,0 +1,18 @@
+[
+  {
+    "code": 1,
+    "title": "producto con el titulo editado",
+    "description": "Este es el producto de prueba 1",
+    "price": 100,
+    "thumbnail": "sin imagen pero editado",
+    "stock": 10
+  },
+  {
+    "code": 2,
+    "title": "producto 2",
+    "description": "Este es el producto de prueba 2",
+    "price": 150,
+    "thumbnail": "sin imagen",
+    "stock": 15
+  }
+]
