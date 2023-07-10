@@ -5,6 +5,9 @@ const rutaProducto = express.Router();
 const productos = new ProductManager('src/db/productos.json');
 
 //ENDPOINTS ----------------------------------------------------------------------------------------------------------------------------------------------------------------
+rutaProducto.get('/realTimeProducts', (req, res) => {
+    res.render('realTimeProducts');
+  });
 
 //Funciona
 rutaProducto.get('/',async (req,res)=>{
@@ -13,14 +16,15 @@ rutaProducto.get('/',async (req,res)=>{
     if(!limit){
         const data1 = JSON.stringify(await productos.getProducts());
         products = JSON.parse(data1)
-        res.setHeader('Content-Type', 'application/json')
-        res.send( JSON.stringify(await products, null,2));
-    } else{
-        const data = JSON.stringify(await productos.getProducts());
-        products = JSON.parse(data)
-        res.setHeader('Content-Type', 'application/json')
-        await res.send(JSON.stringify(products.slice(0, limit), null, 2));
+        res.render('home', { products });
+        //res.send( JSON.stringify(await products, null,2));
     }
+    // } else{
+    //     const data = JSON.stringify(await productos.getProducts());
+    //     products = JSON.parse(data)
+    //     res.setHeader('Content-Type', 'application/json')
+    //     await res.send(JSON.stringify(products.slice(0, limit), null, 2));
+    // }
         
 })
 
