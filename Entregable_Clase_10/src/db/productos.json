@@ -14,5 +14,21 @@
     "price": 150,
     "thumbnail": "sin imagen",
     "stock": 15
+  },
+  {
+    "code": 3,
+    "title": "producto 3",
+    "description": "Este es el producto de prueba 3",
+    "price": 200,
+    "thumbnail": "sin imagen",
+    "stock": 20
+  },
+  {
+    "code": 4,
+    "title": "producto 4",
+    "description": "Este es el producto de prueba 4",
+    "price": 250,
+    "thumbnail": "sin imagen",
+    "stock": 25
   }
 ]

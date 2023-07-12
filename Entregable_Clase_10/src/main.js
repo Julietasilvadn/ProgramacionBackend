@@ -11,6 +11,7 @@ const aplicacion = express();
 const port = process.env.PORT || 8080;
 const server = createServer(aplicacion);
 const io = new Server(server);
+const productos = new ProductManager('src/db/productos.json');
 
 //Motor de Plantilla
 aplicacion.engine('handlebars', handlebars.engine({
@@ -50,7 +51,7 @@ servidor.on('error', error => console.log(`Error: ${error}`));
 io.on('connection', (socket) => {
   console.log('Nuevo cliente conectado');
 
-  const emitProductList = async (socket) => {
+  const emitProductList = async () => {
     try {
       const products = await productos.getProducts();
       socket.emit('productList', products);
